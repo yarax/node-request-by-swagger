@@ -19,7 +19,7 @@ describe('build options by endpoint', () => {
     };
     requestOptions = getRequestOptions(endpoint, options);
     assert.equal(requestOptions.url, 'http://petstore.swagger.io/v2/pet');
-    assert.deepEqual(requestOptions.body, { body: { name: 'test' } });
+    assert.deepEqual(requestOptions.body, { name: 'test' });
   });
 
   it('test with request', (done) => {

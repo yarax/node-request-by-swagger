@@ -19,9 +19,8 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
         if (contentType === 'application/x-www-form-urlencoded') {
           reqOpts.body = reqOpts.body ? `${reqOpts.body}&${param.name}=${value}` : `${param.name}=${value}`;
           reqOpts.json = false;
-        } else { // json
-          if (!reqOpts.body) reqOpts.body = {};
-          reqOpts.body[param.name] = value;
+        } else {
+          reqOpts.body = value;
         }
         break;
       case 'formData':
