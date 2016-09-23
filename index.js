@@ -2,7 +2,9 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
   fixture.url = fixture.url || fixture.path;
   fixture.request = fixture.request || fixture.args;
   baseUrl = baseUrl || fixture.baseUrl || '';
-  var reqOpts = {};
+  var reqOpts = {
+    headers: {}
+  };
   var contentType = endpoint.consumes ? endpoint.consumes[0] : 'application/json';
   reqOpts.method = fixture.method;
   reqOpts.url = `${baseUrl}${fixture.url}`;
