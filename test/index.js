@@ -5,7 +5,7 @@ const request = require('request');
 let requestOptions;
 
 describe('build options by endpoint', () => {
-  it('body', () => {
+  it('body json', () => {
     const path = '/pet';
     const endpoint = schema.paths[path].post;
     const args = {
