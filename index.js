@@ -37,6 +37,15 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
         break;
       case 'query':
         if (!reqOpts.qs) reqOpts.qs = {};
+        let newValue;
+        if (Array.isArray(value)) {
+          newValue = value[0];
+        } else {
+          newValue = value;
+        }
+        if (typeof value !== 'string') {
+          throw new Error('GET query string for non string values is not supported');
+        }
         reqOpts.qs[param.name] = value;
         break;
       case 'headers':
