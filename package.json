@@ -1,6 +1,6 @@
 {
   "name": "node-request-by-swagger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Constructs request.js options from swagger endpoint",
   "main": "index.js",
   "scripts": {
