@@ -43,7 +43,7 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
         } else {
           newValue = value;
         }
-        if (typeof value !== 'string') {
+        if (typeof newValue !== 'string') {
           throw new Error('GET query string for non string values is not supported');
         }
         reqOpts.qs[param.name] = value;
