@@ -10,7 +10,7 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
   reqOpts.url = `${baseUrl}${fixture.url}`;
   reqOpts.headers['Content-type'] = contentType;
 
-  endpoint.parameters.forEach((param) => {
+  (endpoint.parameters || []).forEach((param) => {
     var value = fixture.request[param.name];
 
     if (param.required && !value) throw new Error(`No required request field ${param.name} for ${fixture.method.toUpperCase()} ${fixture.url}`);
