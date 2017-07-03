@@ -37,7 +37,7 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
         break;
       case 'query':
         if (!reqOpts.qs) reqOpts.qs = {};
-        let newValue;
+        var newValue;
         if (Array.isArray(value)) {
           newValue = value[0];
         } else {
