@@ -22,7 +22,7 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
           reqOpts.body = reqOpts.body ? `${reqOpts.body}&${param.name}=${value}` : `${param.name}=${value}`;
           reqOpts.json = false;
         } else {
-          reqOpts.body = value;
+          reqOpts.body = JSON.stringify(value);
         }
         break;
       case 'formData':
