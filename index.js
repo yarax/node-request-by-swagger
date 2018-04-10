@@ -1,5 +1,16 @@
 'use strict';
 
+function isEmpty(value) {
+  switch (typeof value) {
+    case 'string':
+      return !value.length;
+    case 'number':
+      return false;
+    default:
+      return !value;
+  }
+}
+
 function getRequestOptions(endpoint, fixture, baseUrl) {
   fixture.url = fixture.url || fixture.path;
   fixture.request = fixture.request || fixture.args;
@@ -15,8 +26,8 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
   (endpoint.parameters || []).forEach(function (param) {
     var value = fixture.request[param.name];
 
-    if (param.required && !value) throw new Error('No required request field ' + param.name + ' for ' + fixture.method.toUpperCase() + ' ' + fixture.url);
-    if (!value) return;
+    if (param.required && isEmpty(value)) throw new Error('No required request field ' + param.name + ' for ' + fixture.method.toUpperCase() + ' ' + fixture.url);
+    if (isEmpty(value)) return;
 
     switch (param.in) {
       case 'body':
