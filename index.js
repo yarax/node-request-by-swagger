@@ -1,6 +1,6 @@
 'use strict';
 
-function getRequestOptions(endpoint, fixture, baseUrl) {
+function getRequestOptions(endpoint, fixture, baseUrl, schemaParameters) {
   fixture.url = fixture.url || fixture.path;
   fixture.request = fixture.request || fixture.args;
   baseUrl = baseUrl || fixture.baseUrl || '';
@@ -13,6 +13,15 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
   reqOpts.headers['Content-type'] = contentType;
 
   (endpoint.parameters || []).forEach(function (param) {
+    if (param.$ref) {
+      if (schemaParameters.get && typeof schemaParameters.get === 'function') {
+        param = schemaParameters.get(param.$ref);
+      } else {
+        const paramName = param.$ref.replace('#/parameters/', '');
+        param = schemaParameters[paramName];
+      }
+    }
+
     var value = fixture.request[param.name];
 
     if (param.required && !value) throw new Error('No required request field ' + param.name + ' for ' + fixture.method.toUpperCase() + ' ' + fixture.url);
