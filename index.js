@@ -50,10 +50,12 @@ function getRequestOptions(endpoint, fixture, baseUrl) {
         }
         reqOpts.qs[param.name] = newValue;
         break;
-      case 'headers':
+      case 'header':
         if (!reqOpts.headers) reqOpts.headers = {};
         reqOpts.headers[param.name] = value;
         break;
+      default:
+        throw new Error(`Unsupported param type for param ${param.name}: ${param.in}`)
     }
   });
 
