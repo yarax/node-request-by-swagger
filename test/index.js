@@ -54,5 +54,29 @@ describe('build options by endpoint', () => {
       }
     });
   });
+
+  it('should allow empty strings', () => {
+    const path = '/pet/{petId}';
+    const endpoint = schema.paths[path].delete;
+    const args = {
+      petId: '',
+      api_key: 'mock api key'
+    };
+    const options = {
+      method: 'delete',
+      baseUrl: `http://${schema.host}${schema.basePath}`,
+      path: path,
+      args: args,
+    };
+    requestOptions = getRequestOptions(endpoint, options, null, schema.parameters);
+    assert.deepEqual(requestOptions, {
+      url: 'http://petstore.swagger.io/v2/pet/',
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json',
+        api_key: 'mock api key'
+      }
+    });
+  });
 });
 
