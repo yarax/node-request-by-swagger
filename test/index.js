@@ -22,7 +22,7 @@ describe('build options by endpoint', () => {
       url: 'http://petstore.swagger.io/v2/pet',
       method: 'post',
       headers: { 'Content-type': 'application/json' },
-      body: { name: 'test' } });
+      body: JSON.stringify({ name: 'test' }) });
   });
 
   it('should generate valid request options', (done) => {
