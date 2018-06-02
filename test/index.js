@@ -21,7 +21,7 @@ describe('build options by endpoint', () => {
     assert.deepEqual(requestOptions, {
       url: 'http://petstore.swagger.io/v2/pet',
       method: 'post',
-      headers: { 'Content-type': 'application/json' },
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ name: 'test' }) });
   });
 
@@ -49,7 +49,7 @@ describe('build options by endpoint', () => {
       url: 'http://petstore.swagger.io/v2/pet/mock-pet-id',
       method: 'delete',
       headers: {
-        'Content-type': 'application/json',
+        'content-type': 'application/json',
         api_key: 'mock api key'
       }
     });
@@ -73,7 +73,7 @@ describe('build options by endpoint', () => {
       url: 'http://petstore.swagger.io/v2/pet/',
       method: 'delete',
       headers: {
-        'Content-type': 'application/json',
+        'content-type': 'application/json',
         api_key: 'mock api key'
       }
     });
