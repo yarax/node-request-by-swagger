@@ -10,7 +10,7 @@ function getRequestOptions(endpoint, fixture, baseUrl, schemaParameters) {
   var contentType = endpoint.consumes ? endpoint.consumes[0] : 'application/json';
   reqOpts.method = fixture.method;
   reqOpts.url = '' + baseUrl + fixture.url;
-  reqOpts.headers['Content-type'] = contentType;
+  reqOpts.headers['content-type'] = contentType;
 
   (endpoint.parameters || []).forEach(function (param) {
     if (param.$ref) {
