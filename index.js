@@ -24,8 +24,8 @@ function getRequestOptions(endpoint, fixture, baseUrl, schemaParameters) {
 
     var value = fixture.request[param.name];
 
-    if (param.required && !value) throw new Error('No required request field ' + param.name + ' for ' + fixture.method.toUpperCase() + ' ' + fixture.url);
-    if (!value) return;
+    if (param.required && !value && value !== '') throw new Error('No required request field ' + param.name + ' for ' + fixture.method.toUpperCase() + ' ' + fixture.url);
+    if (!value && value !== '') return;
 
     switch (param.in) {
       case 'body':
