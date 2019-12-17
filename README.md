@@ -19,15 +19,12 @@ npm i --save node-request-by-swagger
 
 ```
 const getRequestOptions = require('node-request-by-swagger');
-const options = getRequestOptions(schema['/pet'].post, {
+const options = getRequestOptions(schema, {
     method: 'post',
-    baseUrl: `http://${schema.host}${schema.basePath}`,
     path: '/pet',
-    args: {
-        body: {
-            name: 'bob'
-        }
-    },
+    request: {
+        name: 'bob'
+    }
 });
 
 ```
