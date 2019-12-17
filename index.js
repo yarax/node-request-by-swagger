@@ -1,24 +1,43 @@
 'use strict';
 
-function getRequestOptions(endpoint, fixture, baseUrl, schemaParameters) {
+const _getRef = (json, ref) => {
+  const refItems = ref.split('/');
+  let returnObject = json;
+
+  refItems.forEach((refItem, index) => {
+    if (index !== 0) returnObject = returnObject[refItem];
+  });
+
+  return returnObject;
+};
+
+const getRequestOptions = (json, fixture, schemaParameters) => {
+  const endpoint = json.paths[fixture.path][fixture.method];
+
   fixture.url = fixture.url || fixture.path;
   fixture.request = fixture.request || fixture.args;
-  baseUrl = baseUrl || fixture.baseUrl || '';
+
   var reqOpts = {
     headers: {}
   };
+
   var contentType = endpoint.consumes ? endpoint.consumes[0] : 'application/json';
   reqOpts.method = fixture.method;
-  reqOpts.url = '' + baseUrl + fixture.url;
+
+  if (json.swagger) {
+    reqOpts.url = `${json.schemes[0]}://${json.host}${json.basePath ? json.basePath : ''}${fixture.path}`;
+  } else {
+    reqOpts.url = `${json.servers[0].url}${fixture.path}`;
+  }
+
   reqOpts.headers['content-type'] = contentType;
 
   (endpoint.parameters || []).forEach(function (param) {
     if (param.$ref) {
-      if (schemaParameters.get && typeof schemaParameters.get === 'function') {
+      if (schemaParameters && schemaParameters.get && typeof schemaParameters.get === 'function') {
         param = schemaParameters.get(param.$ref);
       } else {
-        const paramName = param.$ref.replace('#/parameters/', '');
-        param = schemaParameters[paramName];
+        param = _getRef(json, param.$ref);
       }
     }
 
