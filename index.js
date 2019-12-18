@@ -25,7 +25,7 @@ const getRequestOptions = (json, fixture, schemaParameters) => {
   reqOpts.method = fixture.method;
 
   if (json.swagger) {
-    reqOpts.url = `${json.schemes[0]}://${json.host}${json.basePath ? json.basePath : ''}${fixture.path}`;
+    reqOpts.url = `${json.schemes[0]}://${json.host}${json.basePath ? json.basePath.replace(/\/\s*$/, '') : ''}${fixture.path}`;
   } else {
     reqOpts.url = `${json.servers[0].url}${fixture.path}`;
   }
